@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>WorkerTrack - Attendance & Payroll</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <div class="brand">
+        <div class="brand-icon">
+            <i class="fa-solid fa-people-group"></i>
+        </div>
+
+        <div>
+            <h2>WorkerTrack</h2>
+            <span>Attendance & Payroll</span>
+        </div>
+    </div>
+
+
+    <nav class="navigation">
+
+        <button class="nav-item active" data-page="dashboard">
+            <i class="fa-solid fa-grid-2"></i>
+            <span>Dashboard</span>
+        </button>
+
+        <button class="nav-item" data-page="workers">
+            <i class="fa-solid fa-users"></i>
+            <span>Workers</span>
+        </button>
+
+        <button class="nav-item" data-page="attendance">
+            <i class="fa-solid fa-calendar-check"></i>
+            <span>Attendance</span>
+        </button>
+
+        <button class="nav-item" data-page="payments">
+            <i class="fa-solid fa-indian-rupee-sign"></i>
+            <span>Payments</span>
+        </button>
+
+        <button class="nav-item" data-page="reports">
+            <i class="fa-solid fa-chart-column"></i>
+            <span>Reports</span>
+        </button>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <button class="nav-item">
+            <i class="fa-solid fa-gear"></i>
+            <span>Settings</span>
+        </button>
+
+        <div class="admin-profile">
+
+            <div class="admin-avatar">
+                A
+            </div>
+
+            <div>
+                <strong>Administrator</strong>
+                <span>Manager</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</aside>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="main">
+
+    <!-- MOBILE HEADER -->
+
+    <header class="mobile-header">
+
+        <button id="menuBtn">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <h2>WorkerTrack</h2>
+
+    </header>
+
+
+    <!-- ================= DASHBOARD ================= -->
+
+    <section id="dashboard" class="page active-page">
+
+        <div class="page-header">
+
+            <div>
+                <p class="eyebrow">WORKFORCE OVERVIEW</p>
+                <h1>Good morning, Admin 👋</h1>
+                <p id="dashboardDate"></p>
+            </div>
+
+            <button class="primary-btn" id="dashboardAddWorker">
+                <i class="fa-solid fa-plus"></i>
+                Add Worker
+            </button>
+
+        </div>
+
+
+        <!-- STAT CARDS -->
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-icon blue">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+
+                <div>
+                    <span>Total Workers</span>
+                    <h2 id="statWorkers">0</h2>
+                    <small>Registered workers</small>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon green">
+                    <i class="fa-solid fa-user-check"></i>
+                </div>
+
+                <div>
+                    <span>Present Today</span>
+                    <h2 id="statPresent">0</h2>
+                    <small>Workers marked present</small>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon orange">
+                    <i class="fa-solid fa-clock"></i>
+                </div>
+
+                <div>
+                    <span>Hours Today</span>
+                    <h2 id="statHours">0h 0m</h2>
+                    <small>Total working time</small>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon purple">
+                    <i class="fa-solid fa-wallet"></i>
+                </div>
+
+                <div>
+                    <span>Payment Today</span>
+                    <h2 id="statPayment">₹0</h2>
+                    <small>Estimated payment</small>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- DASHBOARD GRID -->
+
+        <div class="dashboard-grid">
+
+            <!-- QUICK ACTIONS -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <div>
+                        <h3>Quick Actions</h3>
+                        <p>Manage your workforce quickly</p>
+                    </div>
+
+                </div>
+
+
+                <div class="quick-actions">
+
+                    <button class="quick-action" data-page="workers">
+
+                        <div class="quick-icon blue">
+                            <i class="fa-solid fa-user-plus"></i>
+                        </div>
+
+                        <strong>Add Worker</strong>
+                        <span>Create worker profile</span>
+
+                    </button>
+
+
+                    <button class="quick-action" data-page="attendance">
+
+                        <div class="quick-icon green">
+                            <i class="fa-solid fa-calendar-plus"></i>
+                        </div>
+
+                        <strong>Attendance</strong>
+                        <span>Record today's work</span>
+
+                    </button>
+
+
+                    <button class="quick-action" data-page="payments">
+
+                        <div class="quick-icon purple">
+                            <i class="fa-solid fa-money-bill-wave"></i>
+                        </div>
+
+                        <strong>Payments</strong>
+                        <span>Check salary totals</span>
+
+                    </button>
+
+
+                    <button class="quick-action" data-page="reports">
+
+                        <div class="quick-icon orange">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+
+                        <strong>Reports</strong>
+                        <span>View monthly records</span>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- TODAY -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <div>
+                        <h3>Today's Summary</h3>
+                        <p id="summaryDate"></p>
+                    </div>
+
+                </div>
+
+
+                <div class="summary-list">
+
+                    <div class="summary-row">
+                        <span>
+                            <i class="fa-solid fa-circle-check green-text"></i>
+                            Present
+                        </span>
+
+                        <strong id="summaryPresent">0</strong>
+                    </div>
+
+
+                    <div class="summary-row">
+                        <span>
+                            <i class="fa-solid fa-circle-xmark red-text"></i>
+                            Absent
+                        </span>
+
+                        <strong id="summaryAbsent">0</strong>
+                    </div>
+
+
+                    <div class="summary-row">
+                        <span>
+                            <i class="fa-solid fa-clock orange-text"></i>
+                            Hours
+                        </span>
+
+                        <strong id="summaryHours">0h</strong>
+                    </div>
+
+
+                    <div class="summary-row">
+                        <span>
+                            <i class="fa-solid fa-indian-rupee-sign purple-text"></i>
+                            Payment
+                        </span>
+
+                        <strong id="summaryPayment">₹0</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RECENT ATTENDANCE -->
+
+        <div class="card table-card">
+
+            <div class="card-header">
+
+                <div>
+                    <h3>Recent Attendance</h3>
+                    <p>Latest worker attendance records</p>
+                </div>
+
+                <button class="text-btn" data-page="attendance">
+                    View all →
+                </button>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Worker</th>
+                            <th>Date</th>
+                            <th>Shift 1</th>
+                            <th>Shift 2</th>
+                            <th>Total</th>
+                            <th>Payment</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="recentAttendanceTable"></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= WORKERS ================= -->
+
+    <section id="workers" class="page">
+
+        <div class="page-header">
+
+            <div>
+                <p class="eyebrow">WORKFORCE</p>
+                <h1>Workers</h1>
+                <p>Manage your worker profiles and hourly rates.</p>
+            </div>
+
+            <button class="primary-btn" id="addWorkerBtn">
+                <i class="fa-solid fa-plus"></i>
+                Add Worker
+            </button>
+
+        </div>
+
+
+        <div class="toolbar">
+
+            <div class="search-box">
+
+                <i class="fa-solid fa-search"></i>
+
+                <input
+                    type="text"
+                    id="workerSearch"
+                    placeholder="Search workers..."
+                >
+
+            </div>
+
+        </div>
+
+
+        <div id="workersGrid" class="workers-grid"></div>
+
+    </section>
+
+
+    <!-- ================= ATTENDANCE ================= -->
+
+    <section id="attendance" class="page">
+
+        <div class="page-header">
+
+            <div>
+                <p class="eyebrow">DAILY RECORDS</p>
+                <h1>Attendance</h1>
+                <p>Record working hours and shifts.</p>
+            </div>
+
+            <button class="primary-btn" id="addAttendanceBtn">
+                <i class="fa-solid fa-plus"></i>
+                Mark Attendance
+            </button>
+
+        </div>
+
+
+        <div class="attendance-controls">
+
+            <div class="date-control">
+
+                <label>Date</label>
+
+                <input type="date" id="attendanceDate">
+
+            </div>
+
+            <div class="search-box">
+
+                <i class="fa-solid fa-search"></i>
+
+                <input
+                    type="text"
+                    id="attendanceSearch"
+                    placeholder="Search worker..."
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="card table-card">
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Worker</th>
+                            <th>Status</th>
+                            <th>Shift 1</th>
+                            <th>Shift 2</th>
+                            <th>Total Hours</th>
+                            <th>Rate</th>
+                            <th>Payment</th>
+                            <th>Action</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="attendanceTable"></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= PAYMENTS ================= -->
+
+    <section id="payments" class="page">
+
+        <div class="page-header">
+
+            <div>
+                <p class="eyebrow">PAYROLL</p>
+                <h1>Payments</h1>
+                <p>Track worker earnings based on actual hours.</p>
+            </div>
+
+        </div>
+
+
+        <div class="stats-grid payment-stats">
+
+            <div class="stat-card">
+
+                <div class="stat-icon purple">
+                    <i class="fa-solid fa-wallet"></i>
+                </div>
+
+                <div>
+                    <span>Total Earnings</span>
+                    <h2 id="paymentTotal">₹0</h2>
+                    <small>All recorded attendance</small>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon orange">
+                    <i class="fa-solid fa-clock"></i>
+                </div>
+
+                <div>
+                    <span>Total Hours</span>
+                    <h2 id="paymentHours">0h</h2>
+                    <small>Recorded working hours</small>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="card table-card">
+
+            <div class="card-header">
+
+                <div>
+                    <h3>Worker Payment Summary</h3>
+                    <p>Total earnings by worker</p>
+                </div>
+
+            </div>
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Worker</th>
+                            <th>Hourly Rate</th>
+                            <th>Total Hours</th>
+                            <th>Total Payment</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="paymentsTable"></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= REPORTS ================= -->
+
+    <section id="reports" class="page">
+
+        <div class="page-header">
+
+            <div>
+                <p class="eyebrow">ANALYTICS</p>
+                <h1>Reports</h1>
+                <p>Review attendance, hours and payment data.</p>
+            </div>
+
+        </div>
+
+
+        <div class="report-filters card">
+
+            <div>
+
+                <label>Month</label>
+
+                <input type="month" id="reportMonth">
+
+            </div>
+
+            <div>
+
+                <label>Worker</label>
+
+                <select id="reportWorker">
+
+                    <option value="all">All Workers</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-icon green">
+                    <i class="fa-solid fa-calendar-check"></i>
+                </div>
+
+                <div>
+                    <span>Present Days</span>
+                    <h2 id="reportDays">0</h2>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon orange">
+                    <i class="fa-solid fa-clock"></i>
+                </div>
+
+                <div>
+                    <span>Total Hours</span>
+                    <h2 id="reportHours">0h</h2>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon purple">
+                    <i class="fa-solid fa-wallet"></i>
+                </div>
+
+                <div>
+                    <span>Total Payment</span>
+                    <h2 id="reportPayment">₹0</h2>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <div>
+                    <h3>Monthly Records</h3>
+                    <p>Detailed attendance for selected period</p>
+                </div>
+
+            </div>
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Date</th>
+                            <th>Worker</th>
+                            <th>Shift 1</th>
+                            <th>Shift 2</th>
+                            <th>Total Hours</th>
+                            <th>Payment</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="reportsTable"></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- ================= WORKER MODAL ================= -->
+
+<div class="modal-overlay" id="workerModal">
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <div>
+                <p class="eyebrow">WORKER PROFILE</p>
+                <h2 id="workerModalTitle">Add Worker</h2>
+            </div>
+
+            <button class="close-btn" data-close="workerModal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+
+        <form id="workerForm">
+
+            <input type="hidden" id="editWorkerId">
+
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>Worker Name *</label>
+
+                    <input
+                        type="text"
+                        id="workerName"
+                        placeholder="e.g. Ahmed Khan"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Worker ID *</label>
+
+                    <input
+                        type="text"
+                        id="workerId"
+                        placeholder="e.g. W-001"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Phone Number</label>
+
+                    <input
+                        type="tel"
+                        id="workerPhone"
+                        placeholder="e.g. 9876543210"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Hourly Rate (₹) *</label>
+
+                    <input
+                        type="number"
+                        id="workerRate"
+                        min="0"
+                        step="0.01"
+                        placeholder="e.g. 120"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button type="button" class="secondary-btn" data-close="workerModal">
+                    Cancel
+                </button>
+
+                <button type="submit" class="primary-btn">
+                    <i class="fa-solid fa-check"></i>
+                    Save Worker
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ================= ATTENDANCE MODAL ================= -->
+
+<div class="modal-overlay" id="attendanceModal">
+
+    <div class="modal large-modal">
+
+        <div class="modal-header">
+
+            <div>
+                <p class="eyebrow">ATTENDANCE ENTRY</p>
+                <h2>Mark Attendance</h2>
+            </div>
+
+            <button class="close-btn" data-close="attendanceModal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+
+        <form id="attendanceForm">
+
+            <input type="hidden" id="editAttendanceId">
+
+
+            <div class="form-group">
+
+                <label>Worker *</label>
+
+                <select id="attendanceWorker" required>
+
+                    <option value="">
+                        Select worker
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>Date *</label>
+
+                    <input type="date" id="recordDate" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Status *</label>
+
+                    <select id="attendanceStatus" required>
+
+                        <option value="Present">Present</option>
+                        <option value="Absent">Absent</option>
+                        <option value="Leave">Leave</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div id="shiftSection">
+
+                <div class="shift-card">
+
+                    <div class="shift-title">
+
+                        <div>
+                            <span class="shift-number">01</span>
+
+                            <div>
+                                <strong>Shift 1</strong>
+                                <small>First working period</small>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="time-grid">
+
+                        <div class="form-group">
+
+                            <label>Start Time</label>
+
+                            <input type="time" id="shift1Start">
+
+                        </div>
+
+
+                        <div class="time-arrow">
+                            →
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>End Time</label>
+
+                            <input type="time" id="shift1End">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="shift-card">
+
+                    <div class="shift-title">
+
+                        <div>
+                            <span class="shift-number second">02</span>
+
+                            <div>
+                                <strong>Shift 2</strong>
+                                <small>Second working period</small>
+                            </div>
+                        </div>
+
+                        <button
+                            type="button"
+                            class="remove-shift"
+                            id="removeShift2"
+                        >
+                            Remove
+                        </button>
+
+                    </div>
+
+
+                    <div class="time-grid">
+
+                        <div class="form-group">
+
+                            <label>Start Time</label>
+
+                            <input type="time" id="shift2Start">
+
+                        </div>
+
+
+                        <div class="time-arrow">
+                            →
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>End Time</label>
+
+                            <input type="time" id="shift2End">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="add-shift-btn"
+                id="addShiftBtn"
+            >
+                <i class="fa-solid fa-plus"></i>
+                Add Second Shift
+            </button>
+
+
+            <!-- CALCULATION PREVIEW -->
+
+            <div class="calculation-box">
+
+                <div>
+
+                    <span>Total Working Time</span>
+
+                    <strong id="previewHours">
+                        0h 0m
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>Hourly Rate</span>
+
+                    <strong id="previewRate">
+                        ₹0/hr
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>Estimated Payment</span>
+
+                    <strong id="previewPayment">
+                        ₹0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="secondary-btn"
+                    data-close="attendanceModal"
+                >
+                    Cancel
+                </button>
+
+                <button type="submit" class="primary-btn">
+
+                    <i class="fa-solid fa-check"></i>
+
+                    Save Attendance
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<div id="toastContainer"></div>
+
+
+<script src="attendance.js"></script>
+
+</body>
+</html>
